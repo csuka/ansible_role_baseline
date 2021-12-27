@@ -4,7 +4,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: '0744'
-  register: resolv
+  tags: molecule-notest
   loop:
     - src: resolv.conf.j2
       dest: /etc/resolv.conf
@@ -16,3 +16,4 @@
     name: NetworkManager
     state: reloaded
   when: resolv.changed
+  tags: molecule-notest
