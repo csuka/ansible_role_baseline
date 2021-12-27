@@ -1,0 +1,23 @@
+---
+- name: sshd | disable root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^.?PermitRootLogin'
+    line: 'PermitRootLogin no'
+  register: ssh
+
+- name: sshd | set parameters in config
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+    state: "{{ item.state }}"
+    validate: 'sshd -tf %s'
+  loop: "{{ sshd_parameters }}"
+  register: sshd_config
+
+- name: sshd | restart if config changed
+  service:
+    name: sshd
+    state: restarted
+  when: sshd_config.changed

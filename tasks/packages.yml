@@ -1,0 +1,4 @@
+---
+- name: packages | install default packages
+  dnf:
+    name: "{{ packages_to_install }}"

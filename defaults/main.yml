@@ -1,0 +1,98 @@
+---
+selinux: true
+selinux_state: disabled
+selinux_reboot: true
+
+resolv: true
+resolv_ns:
+  - 1.1.1.1
+resolv_search_domain: ""
+
+history: true
+
+colors: true
+
+time: true
+timezone: Europe/Amsterdam
+
+editor: true
+editor_application: vim
+
+sshd: true
+sshd_parameters:
+  - line: 'PermitRootLogin no'
+    regexp: '^PermitRootLogin'
+    state: present
+
+firewall: true
+
+motd: true
+motd_owner: someone
+
+locale: true
+locale_lang: 'en_US.UTF-8'
+locale_language: 'en_US.UTF-8'
+
+packages: true
+packages_to_install:
+  - bc
+  - curl
+  - git
+  - glibc-all-langpacks
+  - iotop
+  - langpacks-nl
+  - logwatch
+  - lsof
+  - mailx
+  - mlocate
+  - nano
+  - nc
+  # - net-snmp # installs mariadb-connector. Not desired when using db's
+  - net-tools
+  - openssh
+  - openssh-server
+  # - postfix
+  - psmisc
+  - rsync
+  - socat
+  - strace
+  - sudo
+  - sysstat
+  - tcpdump
+  - telnet
+  - tmux
+  - tree
+  - unzip
+  - vim
+  - wget
+  - whois
+  - xinetd
+  - yum-utils
+  - zip
+
+repos: true
+repos_epel: true
+repos_epel_url: >-
+  https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+repos_epel_gpg: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
+repos_custom: []
+# example:
+# - name: epel-something
+#   description: "Repo for EL $releasever - $basearch"
+#   baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+#   mirrorlist: "" # can be left empty
+#   enabled: 'yes'  # either yes or no
+#   state: present
+#   gpgcheck: yes # can be left empty, default is no
+#   gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8 # can be left empty
+#   includepkgs: vim # can be left empty
+
+sysctl: true
+sysctl_config:
+  - name: kernel.panic
+    value: '1'
+    file: /etc/sysctl.conf
+
+# so far, no configuration for mail has been done
+# but this should be included in the baseline
+# mail: false

@@ -1,0 +1,6 @@
+---
+- name: selinux | set
+  selinux:
+    state: "{{ selinux_state }}"
+  register: selinux_config
+  tags: molecule-notest

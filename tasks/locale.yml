@@ -1,0 +1,24 @@
+---
+- name: locales | get current locale and language configuration
+  shell: localectl status
+  register: locale_status
+  changed_when: false
+
+- name: locales | parse 'LANG' from current locale and language configuration
+  set_fact:
+    current_locale_lang: >-
+      {{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\1') | first }}
+
+- name: locales | parse 'LANGUAGE' from current locale & language configuration
+  set_fact:
+    current_locale_language: >-
+      {{ locale_status.stdout | regex_search('LANGUAGE=([^\n]+)', '\1') |
+      default([locale_lang], true) | first }}
+
+- name: locales | configure locale
+  shell: >-
+    localectl set-locale LANG={{ locale_lang }}
+    LANGUAGE={{ locale_language }}
+  when:
+    current_locale_lang != locale_lang
+    or current_locale_language != locale_language

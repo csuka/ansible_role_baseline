@@ -1,0 +1,6 @@
+---
+- name: colors | set color prompt
+  template:
+    src: color.sh.j2
+    mode: '0664'
+    dest: /etc/profile.d/color.sh

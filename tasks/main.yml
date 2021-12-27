@@ -1,0 +1,65 @@
+---
+- include_tasks: selinux.yml
+  when: selinux
+  tags: selinux
+
+- include_tasks: resolv.yml
+  when: resolv
+  tags: resolv
+
+- include_tasks: history.yml
+  when: history
+  tags: history
+
+- include_tasks: colors.yml
+  when: colors
+  tags: colors
+
+- include_tasks: time.yml
+  when: time
+  tags: time
+
+- include_tasks: locale.yml
+  when: locale
+  tags: locale
+
+- include_tasks: editor.yml
+  when: editor
+  tags: editor
+
+- include_tasks: motd.yml
+  when: motd
+  tags: motd
+
+- include_tasks: sshd.yml
+  when: sshd
+  tags: sshd
+
+- include_tasks: firewall.yml
+  when: firewall
+  tags: firewall
+
+- include_tasks: repos.yml
+  when: repos
+  tags: repos
+
+- include_tasks: packages.yml
+  when: packages
+  tags: packages
+
+- include_tasks: sysctl.yml
+  when: sysctl
+  tags: sysctl
+
+# is empty for now
+# - include_tasks: mail.yml
+#   when: mail
+#   tags: mail
+
+- name: reboot server when selinux setting was changed
+  reboot:
+    post_reboot_delay: 15
+  when:
+    - selinux_config.changed
+    - selinux_reboot
+  tags: molecule-notest

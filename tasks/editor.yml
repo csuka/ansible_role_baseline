@@ -1,0 +1,14 @@
+---
+- name: editor | install
+  dnf:
+    name: "{{ editor_application }}"
+
+- name: editor | set system wide
+  lineinfile:
+    line: "export {{ item }}={{ editor_application }}"
+    regexp: "^export {{ item }}={{ editor_application }}"
+    path: /etc/profile.d/{{ editor_application }}.sh
+    mode: '0644'
+  loop:
+    - VISUAL
+    - EDITOR

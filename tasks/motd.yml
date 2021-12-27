@@ -1,0 +1,12 @@
+---
+- name: motd | set motd file
+  template:
+    src: motd.j2
+    dest: /etc/motd.sh
+    mode: '0744'
+
+- name: motd | ensure motd is set in /etc/profile
+  lineinfile:
+    dest: /etc/profile
+    state: present
+    line: 'sh /etc/motd.sh'

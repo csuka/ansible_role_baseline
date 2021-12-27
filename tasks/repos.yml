@@ -1,0 +1,46 @@
+---
+- name: repos | check if epel repo is already configured
+  shell: set -o pipefail | dnf repolist | grep epel
+  register: epel_install_check
+  changed_when: false
+  when: repos_epel
+  args:
+    warn: false
+
+- block:
+
+    - name: repos | import epel gpg key
+      rpm_key:
+        key: "{{ repos_epel_gpg }}"
+
+    - name: repos | add epel repo
+      dnf:
+        name: "{{ epel_repo_url }}"
+      register: epel_result
+      until: epel_result is succeeded
+      retries: 5
+      delay: 10
+
+  when: "'epel' not in epel_install_check.stdout"
+
+- name: repos | add custom repos if set
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    file: "/etc/yum.repos.d/{{ item.name }}.repo"
+    baseurl: "{{ item.baseurl }}"
+    mirrorlist: "{{ item.mirrorlist | default(omit) }}"
+    enabled: "{{ item.enabled | default('yes') }}"
+    state: "{{ item.state | default('present') }}"
+    gpgcheck: "{{ item.gpgcheck | default('no') }}"
+    gpgkey: "{{ item.gpgkey | default(omit) }}"
+    includepkgs: "{{ item.includepkgs | default(omit) }}"
+  loop: "{{ repos_custom }}"
+  register: repos_set
+  when: repos_custom | length > 0
+
+- name: repos | yum-clean-metadata
+  command: yum clean metadata
+  when: repos_set.changed or epel_result.changed
+  args:
+    warn: false

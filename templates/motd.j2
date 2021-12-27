@@ -1,0 +1,13 @@
+#!/bin/bash
+
+{{ ansible_managed | comment }}
+
+echo "
+## This machine is owned by {{ motd_owner }} ##
+--------------------INFO-------------------
+ - Hostname        : `hostname -f`
+ - Uptime          : `uptime -p`
+ - Logged in users : `who | wc -l`
+ - Release         : `cat /etc/redhat-release`
+--------------------------------------------
+"

@@ -1,0 +1,6 @@
+---
+- name: history | set config in /etc/profile
+  lineinfile:
+    dest: /etc/profile
+    state: present
+    line: export HISTTIMEFORMAT=`echo -e "\033[1;34m%F \033[1;31m%T \033[0m"`
