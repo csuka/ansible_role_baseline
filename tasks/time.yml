@@ -16,3 +16,4 @@
     name: chronyd
     state: started
     enabled: true
+  tags: molecule-notest

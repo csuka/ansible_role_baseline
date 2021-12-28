@@ -1,11 +1,4 @@
 ---
-- name: sshd | disable root login
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '^.?PermitRootLogin'
-    line: 'PermitRootLogin no'
-  register: ssh
-
 - name: sshd | set parameters in config
   lineinfile:
     dest: /etc/ssh/sshd_config
@@ -21,3 +14,4 @@
     name: sshd
     state: restarted
   when: sshd_config.changed
+  tags: molecule-notest
