@@ -30,8 +30,9 @@ motd: true
 motd_owner: someone
 
 locale: true
-locale_lang: 'en_US.UTF-8'
-locale_language: 'en_US.UTF-8'
+locale_lang: en_US.UTF-8
+locale_language: en_US.UTF-8
+locale_short: en
 
 packages: true
 packages_to_install:

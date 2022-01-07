@@ -1,4 +1,8 @@
 ---
+- name: locales | ensure language pack is installed
+  dnf:
+    name: "glibc-langpack-{{ locale_short }}"
+
 - name: locales | get current locale and language configuration
   shell: localectl status
   register: locale_status
