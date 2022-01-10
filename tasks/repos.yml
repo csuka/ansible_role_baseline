@@ -1,6 +1,6 @@
 ---
 - name: repos | check if epel repo is already configured
-  shell: set -o pipefail | dnf repolist | grep epel
+  shell: dnf repolist | grep epel
   register: epel_install_check
   changed_when: false
   when: repos_epel
@@ -21,7 +21,9 @@
       retries: 5
       delay: 10
 
-  when: "'epel' not in epel_install_check.stdout"
+  when:
+    - repos_epel
+    - "'epel' not in epel_install_check.stdout"
 
 - name: repos | add custom repos if set
   yum_repository:
@@ -41,6 +43,6 @@
 
 - name: repos | yum-clean-metadata
   command: yum clean metadata
-  when: repos_set.changed or epel_result.changed
+  when: repos_set.changed or epel_result is defined
   args:
     warn: false

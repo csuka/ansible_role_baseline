@@ -3,3 +3,4 @@ skip_list:
   - '305'
   - '403'
   - '503'
+  - risky-shell-pipe

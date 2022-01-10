@@ -6,3 +6,4 @@
     sysctl_file: "{{ item.file }}"
     reload: true
   loop: "{{ sysctl_config }}"
+  tags: molecule-notest

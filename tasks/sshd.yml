@@ -8,6 +8,7 @@
     validate: 'sshd -tf %s'
   loop: "{{ sshd_parameters }}"
   register: sshd_config
+  tags: molecule-notest
 
 - name: sshd | restart if config changed
   service:
