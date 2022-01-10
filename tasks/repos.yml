@@ -4,6 +4,7 @@
   register: epel_install_check
   changed_when: false
   when: repos_epel
+  tags: molecule-notest
   args:
     warn: false
 
@@ -42,7 +43,7 @@
   when: repos_custom | length > 0
 
 - name: repos | yum-clean-metadata
-  command: yum clean metadata
+  shell: yum clean metadata
   when: repos_set.changed or epel_result is defined
   args:
     warn: false
