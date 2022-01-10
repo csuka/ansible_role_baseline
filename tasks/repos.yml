@@ -13,6 +13,7 @@
     - name: repos | import epel gpg key
       rpm_key:
         key: "{{ repos_epel_gpg }}"
+      tags: molecule-notest
 
     - name: repos | add epel repo
       dnf:
@@ -21,6 +22,7 @@
       until: epel_result is succeeded
       retries: 5
       delay: 10
+      tags: molecule-notest
 
   when:
     - repos_epel
