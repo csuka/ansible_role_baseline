@@ -1,6 +1,6 @@
-# Ansible role: Baseline
+# Baseline
 
-A baseline role for EL 8. It contains:
+An Ansible role that installs, configures and manages a baseline for EL 8.
 
  - selinux
  - resolv.conf
@@ -16,7 +16,6 @@ A baseline role for EL 8. It contains:
  - default packages
  - sysctl configuration
 
-
 ## SElinux
 
 By default, SElinux is configured to disabled, a system reboot is executed at the end of the role if that a change has happened.:
@@ -27,7 +26,7 @@ selinux_state: disabled
 selinux_reboot: true
 ```
 
-## resolv.conf
+## Resolv.conf
 
 The resolv.conf is set, and the file `/etc/NetworkManager/conf.d/90-dns-none.conf` is set to none by default.
 The NetworkManager service is then restarted. This is done by default.
@@ -40,7 +39,7 @@ nameservers:
 search_domain: my_search_domain.com
 ```
 
-## history
+## History
 A configuration is placed in /etc/profile to let the history command show:
 
 ```bash
@@ -48,14 +47,14 @@ user@machine:~$ history
     1  2022-01-30 12:40:59 my-command
 ```
 
-## time
+## Time
 
 ```yaml
 time: true
 timezone: Europe/Amsterdam
 ```
 
-## system locale
+## System locale
 
 ```yaml
 locale: true
@@ -63,7 +62,7 @@ locale_lang: 'en_US.UTF-8'
 locale_language: 'en_US.UTF-8'
 ```
 
-## editor
+## Editor
 
 A basic editor is set:
 
@@ -78,7 +77,7 @@ export VISUAL=vim
 export EDITOR=vim
 ```
 
-## motd
+## MOTD
 
 A motd is set.
 
@@ -99,7 +98,7 @@ Results in:
 --------------------------------------------
 ```
 
-## sshd
+## SSHD
 
 The file /etc/sshd/sshd_config is edited with lineinfile and validated before restarting sshd.
 
@@ -111,7 +110,7 @@ sshd_parameters:
     state: present
 ```
 
-## firewall
+## Firewalling
 
 This role disabled firewalld by default.
 
@@ -121,7 +120,7 @@ firewall: true
 
 I haven't wrote any configuration to handle further configuration because that would require it's own role.
 
-## repos
+## Repositories
 
 Repositories can be managed via this role as well.
 
@@ -143,7 +142,7 @@ repos_custom:
 
 When `repos_epel` is true, the epel-release is installed.
 
-## pacakges
+## Default pacakges
 
 Default packages are installed.
 
@@ -186,7 +185,7 @@ packages_to_install:
   - zip
 ```
 
-## sysctl
+## Sysctl
 
 Set custom sysctl settings.
 
