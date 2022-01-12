@@ -1,32 +1,8 @@
 ---
-- name: repos | check if epel repo is already configured
-  shell: dnf repolist | grep epel
-  register: epel_install_check
-  changed_when: false
-  when: repos_epel
-  tags: molecule-notest
-  args:
-    warn: false
-
-- block:
-
-    - name: repos | import epel gpg key
-      rpm_key:
-        key: "{{ repos_epel_gpg }}"
-      tags: molecule-notest
-
-    - name: repos | add epel repo
-      dnf:
-        name: "{{ epel_repo_url }}"
-      register: epel_result
-      until: epel_result is succeeded
-      retries: 5
-      delay: 10
-      tags: molecule-notest
-
-  when:
-    - repos_epel
-    - "'epel' not in epel_install_check.stdout"
+- name: repos | epel repo when set
+  dnf:
+    name: epel-release
+  when: repos_epel 
 
 - name: repos | add custom repos if set
   yum_repository:
