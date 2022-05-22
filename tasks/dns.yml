@@ -1,17 +1,18 @@
 ---
-- name: resolv | set resolv.conf
+- name: dns | set resolv.conf
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: '0744'
+  register: resolv
   tags: molecule-notest
   loop:
-    - src: resolv.conf.j2
+    - src: dns.conf.j2
       dest: /etc/resolv.conf
     - src: dns-none.j2
       dest: /etc/NetworkManager/conf.d/90-dns-none.conf
 
-- name: resolv | reload networkmanager when resolv changed
+- name: dns | reload networkmanager when resolv changed
   service:
     name: NetworkManager
     state: reloaded

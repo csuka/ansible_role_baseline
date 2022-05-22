@@ -3,10 +3,10 @@ selinux: true
 selinux_state: disabled
 selinux_reboot: true
 
-resolv: true
-resolv_ns:
+dns: true
+dns_ns:
   - 1.1.1.1
-resolv_search_domain: ""
+dns_search_domain: ""
 
 history: true
 

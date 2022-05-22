@@ -1,8 +1,8 @@
 {{ ansible_managed | comment }}
 
-{% if resolv_search_domain | length > 0 %}
+{% if dns_search_domain | length > 0 %}
 {{ search_domain }}
 {% endif %}
-{% for ns in resolv_ns %}
+{% for ns in dns_ns %}
 nameserver {{ ns }}
 {% endfor %}

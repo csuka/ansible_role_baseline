@@ -3,9 +3,9 @@
   when: selinux
   tags: selinux
 
-- include_tasks: resolv.yml
-  when: resolv
-  tags: resolv
+- include_tasks: dns.yml
+  when: dns
+  tags: dns
 
 - include_tasks: history.yml
   when: history
