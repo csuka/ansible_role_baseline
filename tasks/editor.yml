@@ -9,6 +9,7 @@
     regexp: "^export {{ item }}={{ editor_application }}"
     path: /etc/profile.d/{{ editor_application }}.sh
     mode: '0644'
+    create: true
   loop:
     - VISUAL
     - EDITOR

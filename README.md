@@ -1,6 +1,6 @@
 # Baseline
 
-An Ansible role that installs, configures and manages a baseline for EL 8.
+An Ansible role that installs, configures and manages a baseline for EL 8 and 9.
 
  - selinux
  - resolv.conf

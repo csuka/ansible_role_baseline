@@ -44,15 +44,12 @@ packages_to_install:
   - langpacks-nl
   - logwatch
   - lsof
-  - mailx
   - mlocate
-  - nano
   - nc
   # - net-snmp # installs mariadb-connector. Not desired when using db's
   - net-tools
   - openssh
   - openssh-server
-  # - postfix
   - psmisc
   - rsync
   - socat
@@ -67,7 +64,6 @@ packages_to_install:
   - vim
   - wget
   - whois
-  - xinetd
   - yum-utils
   - zip
 
