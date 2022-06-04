@@ -2,7 +2,7 @@
 - name: repos | epel repo when set
   dnf:
     name: epel-release
-  when: repos_epel 
+  when: repos_epel
 
 - name: repos | add custom repos if set
   yum_repository:
