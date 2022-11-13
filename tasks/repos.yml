@@ -1,5 +1,5 @@
 ---
-- name: repos | epel repo when set
+- name: repos | epel repo if set
   dnf:
     name: epel-release
   when: repos_epel

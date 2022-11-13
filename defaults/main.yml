@@ -54,7 +54,6 @@ packages_to_install:
   - rsync
   - socat
   - strace
-  - sudo
   - sysstat
   - tcpdump
   - telnet
@@ -69,9 +68,6 @@ packages_to_install:
 
 repos: true
 repos_epel: true
-repos_epel_url: >-
-  https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-repos_epel_gpg: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
 repos_custom: []
 # example:
 # - name: epel-something
